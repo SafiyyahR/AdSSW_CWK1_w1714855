@@ -7,6 +7,10 @@ class Menu extends CI_Controller
 	function __construct(){
 		parent::__construct();
 		$this->load->model('pizza_model');
+		$this->load->model('combo_meal_model');
+		$this->load->model('drink_model');
+		$this->load->model('side_model');
+		$this->load->model('topping_model');
     }
 	/**
 	 * Index Page for this controller.
@@ -137,6 +141,18 @@ class Menu extends CI_Controller
 		} else {
 			echo 'Table toppings already created ';
 		}
+		$topping_array = array (
+			array("Extra Mozzarella Cheese",0.50, 1.00, 1.50),
+			array("Olives",0.50, 1.00, 1.50),
+			array("Extra Pepperoni", 0.55, 1.10, 1.65),
+			array("Prawn", 0.80, 1.60, 2.40),
+			array("Anchovies", 0.70, 1.40, 2.10),
+			array("Sun Dried Tomatoes", 0.60, 1.20, 1.80)			
+		);
+
+		for ($i=0; $i < count($topping_array); $i++) { 
+			$this->topping_model->insert_record($topping_array[$i]);
+		}
 
 		$fields = array(
 			'side_id' => array(
@@ -154,13 +170,13 @@ class Menu extends CI_Controller
 				'type' => 'DECIMAL',
 				'constraint' => '10,2',
 				'null' => FALSE,
-				'default' => 3.00
+				'default' => 1.50
 			),
 			'side_pr_large' =>  array(
 				'type' => 'DECIMAL',
 				'constraint' => '10,2',
 				'null' => FALSE,
-				'default' => 5.00
+				'default' => 2.50
 			)
 
 		);
@@ -178,6 +194,20 @@ class Menu extends CI_Controller
 		} else {
 			echo 'Table sides already created ';
 		}
+
+		$side_array = array (
+			array("Coleslaw",1.50, 2.50),
+			array("Bread Sticks",3, 5),
+			array("Garlic Bread",3, 5),
+			array("Onion Rings",3, 5),
+			array("Potato Wedges",3, 5),
+			array("Mozzarella Sticks",5, 7.50)						
+		);
+
+		for ($i=0; $i < count($side_array); $i++) { 
+			$this->side_model->insert_record($side_array[$i]);
+		}
+
 		$fields = array(
 			'drink_id' => array(
 				'type' => 'INT',
@@ -196,17 +226,11 @@ class Menu extends CI_Controller
 				'null' => FALSE,
 				'default' => 1.00
 			),
-			'drink_pr_medium' =>  array(
-				'type' => 'DECIMAL',
-				'constraint' => '10,2',
-				'null' => FALSE,
-				'default' => 1.50
-			),
 			'drink_pr_large' =>  array(
 				'type' => 'DECIMAL',
 				'constraint' => '10,2',
 				'null' => FALSE,
-				'default' => 1.75
+				'default' => 2.50
 			)
 
 		);
@@ -224,6 +248,20 @@ class Menu extends CI_Controller
 		} else {
 			echo 'Table drinks already created ';
 		}
+
+		$drink_array = array (
+			array("Pepsi",1.75, 3.00),
+			array("Pepsi Max",1.50, 2.50),
+			array("Pepsi Diet",1.50, 2.50),
+			array("Tango",1.50, 2.50),
+			array("7up Sugar Free",1.50, 2.50),
+			array("Bottled Water",1.00, 1.50)							
+		);
+
+		for ($i=0; $i < count($drink_array); $i++) { 
+			$this->drink_model->insert_record($drink_array[$i]);
+		}
+
 		$fields = array(
 			'cm_id' => array(
 				'type' => 'INT',
@@ -266,16 +304,17 @@ class Menu extends CI_Controller
 				'null' => FALSE,
 				'default' => 0
 			),
-			'cm_no_medium_drink' =>  array(
-				'type' => 'INT',
-				'null' => FALSE,
-				'default' => 0
-			),
 			'cm_no_large_drink' =>  array(
 				'type' => 'INT',
 				'null' => FALSE,
 				'default' => 0
 			),
+			'cm_price' =>  array(
+				'type' => 'DECIMAL',
+				'constraint' => '10,2',
+				'null' => FALSE,
+				'default' => 2.50
+			)
 
 		);
 
@@ -292,6 +331,20 @@ class Menu extends CI_Controller
 		} else {
 			echo 'Table combo_meals already created ';
 		}
+
+		$cm_array = array (
+			array("Family Deal",0, 0, 2, 0,2,0,1, 30.00),
+			array("Couples Deal",0, 2, 0, 0,1,1,0,20.00 ),
+			array("Game Night Deal",0, 0, 3, 0,3,0,2,40.00),
+			array("Halloween Deal",0, 0, 3, 0,1,0,1,35.00),
+			array("Favourite Deal",3, 0, 0, 2,0,1,0,20.00),
+			array("Feast",0, 2, 0, 4,0,2,0, 25.00)					
+		);
+
+		for ($i=0; $i < count($cm_array); $i++) { 
+			$this->combo_meal_model->insert_record($cm_array[$i]);
+		}
+		
 		$this->load->view('display_menu');
 	}
 }
