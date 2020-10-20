@@ -37,17 +37,18 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     echo form_dropdown('pizza', $options, 'small') . '<br>';
                     $js = 'onClick="some_function()"';
                     echo form_button('customise_topping_btn' . $table_data[$i]['pizza_id'], 'Add Toppings', $js) . '<br>';
-                    for ($i = 0; $i < count($data['toppings']); $i++) {
-                        $topping_data = $data['toppings'][$i];
+                    for ($j = 0; $j < count($data['toppings']); $j++) {
+                        $topping_data = $data['toppings'][$j];
                         $toppings = array(
                             'name'          => 'topping' . $topping_data['topping_id'],
                             'id'            => 'topping' . $topping_data['topping_id'],
-                            'value'         => $topping_data['topping_name'],
+                            'value'         => $topping_data['topping_id'],
                             'checked'       => FALSE,
                             'style'         => 'margin:10px'
                         );
 
-                        echo form_checkbox($data);
+                        echo form_checkbox($toppings);
+                        echo form_label($topping_data['topping_name'], 'topping' . $topping_data['topping_id']) . '<br>';
                     }
                     $js = 'onClick="some_function()"';
                     echo form_button('pizza_btn' . $table_data[$i]['pizza_id'], 'Add to Cart&nbsp;&nbsp;&nbsp;&nbsp;' . $screen_pizza_price[$i], $js);
@@ -56,7 +57,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
             case 'sides':
                 for ($i = 0; $i < count($table_data); $i++) {
                     echo '<h3>' . $table_data[$i]['side_name'] . '</h3>';
-                    //echo '<h4>' . $table_data[$i]['side_description'] . '</h4>';
                     echo form_input(['type' => 'number', 'name' => 'side_quantity' . $table_data[$i]['side_id']]);
                     $options = array(
                         'small'         => 'Small Side  - ' . $table_data[$i]['side_pr_small'],
@@ -86,12 +86,142 @@ defined('BASEPATH') or exit('No direct script access allowed');
             case 'combo_meals':
                 for ($i = 0; $i < count($table_data); $i++) {
                     echo '<h3>' . $table_data[$i]['cm_name'] . '</h3>';
-                    echo '<h4>';
-                    echo '</h4>';
-                    echo form_input(['type' => 'number', 'name' => 'cm_quantity' . $table_data[$i]['cm_id']]) . '<br>';
-                    array_push($screen_cm_price, $table_data[$i]['cm_price']);
+                    echo '<h4>' . $table_data[$i]['cm_description'] . '</h4>';
+                    for ($k = 0; $k < $table_data[$i]['cm_no_small_pizza']; $k++) {
+                        if ($table_data[$i]['cm_no_small_pizza'] > 1) {
+                            echo '<h4>Small Pizza ' . ($k + 1) . '</h4>';
+                        } else {
+                            echo '<h4>Small Pizza</h4>';
+                        }
+                        for ($j = 0; $j < count($data['pizza']); $j++) {
+                            $pizza_data = $data['pizza'][$j];
+                            $pizza = array(
+                                'name'          => 'cm_small_pizza' . $k,
+                                'id'            => 'cm_small_pizza' . $k,
+                                'value'         => $pizza_data['pizza_id'],
+                                'checked'       => FALSE,
+                                'style'         => 'margin:10px'
+                            );
+                            echo form_radio($pizza);
+                            echo form_label($pizza_data['pizza_name'], 'cm_small_pizza' . $pizza_data['pizza_id']) . '<br>';
+                        }
+                    }
+                    for ($k = 0; $k < $table_data[$i]['cm_no_medium_pizza']; $k++) {
+                        if ($table_data[$i]['cm_no_medium_pizza'] > 1) {
+                            echo '<h4>Medium Pizza ' . ($k + 1) . '</h4>';
+                        } else {
+                            echo '<h4>Medium Pizza</h4>';
+                        }
+                        for ($j = 0; $j < count($data['pizza']); $j++) {
+                            $pizza_data = $data['pizza'][$j];
+                            $pizza = array(
+                                'name'          => 'cm_medium_pizza' . $k,
+                                'id'            => 'cm_medium_pizza' . $k,
+                                'value'         => $pizza_data['pizza_id'],
+                                'checked'       => FALSE,
+                                'style'         => 'margin:10px'
+                            );
+                            echo form_radio($pizza);
+                            echo form_label($pizza_data['pizza_name'], 'cm_medium_pizza' . $pizza_data['pizza_id']) . '<br>';
+                        }
+                    }
+                    for ($k = 0; $k < $table_data[$i]['cm_no_large_pizza']; $k++) {
+                        if ($table_data[$i]['cm_no_large_pizza'] > 1) {
+                            echo '<h4>Large Pizza ' . ($k + 1) . '</h4>';
+                        } else {
+                            echo '<h4>Large Pizza</h4>';
+                        }
+                        for ($j = 0; $j < count($data['pizza']); $j++) {
+                            $pizza_data = $data['pizza'][$j];
+                            $pizza = array(
+                                'name'          => 'cm_large_pizza' . $k,
+                                'id'            => 'cm_large_pizza' . $k,
+                                'value'         => $pizza_data['pizza_id'],
+                                'checked'       => FALSE,
+                                'style'         => 'margin:10px'
+                            );
+                            echo form_radio($pizza);
+                            echo form_label($pizza_data['pizza_name'], 'cm_large_pizza' . $pizza_data['pizza_id']) . '<br>';
+                        }
+                    }
+                    for ($k = 0; $k < $table_data[$i]['cm_no_small_side']; $k++) {
+                        if ($table_data[$i]['cm_no_small_side'] > 1) {
+                            echo '<h4>Small Side ' . ($k + 1) . '</h4>';
+                        } else {
+                            echo '<h4>Small Side</h4>';
+                        }
+                        for ($j = 0; $j < count($data['sides']); $j++) {
+                            $side_data = $data['sides'][$j];
+                            $side = array(
+                                'name'          => 'cm_small_side' . $k,
+                                'id'            => 'cm_small_side' . $k,
+                                'value'         => $side_data['side_id'],
+                                'checked'       => FALSE,
+                                'style'         => 'margin:10px'
+                            );
+                            echo form_radio($side);
+                            echo form_label($side_data['side_name'], 'cm_small_side' . $side_data['side_id']) . '<br>';
+                        }
+                    }
+                    for ($k = 0; $k < $table_data[$i]['cm_no_large_side']; $k++) {
+                        if ($table_data[$i]['cm_no_large_side'] > 1) {
+                            echo '<h4>Large Side ' . ($k + 1) . '</h4>';
+                        } else {
+                            echo '<h4>Large Side</h4>';
+                        }
+                        for ($j = 0; $j < count($data['sides']); $j++) {
+                            $side_data = $data['sides'][$j];
+                            $side = array(
+                                'name'          => 'cm_large_side' . $k,
+                                'id'            => 'cm_large_side' . $k,
+                                'value'         => $side_data['side_id'],
+                                'checked'       => FALSE,
+                                'style'         => 'margin:10px'
+                            );
+                            echo form_radio($side);
+                            echo form_label($side_data['side_name'], 'cm_large_side' . $side_data['side_id']) . '<br>';
+                        }
+                    }
+                    for ($k = 0; $k < $table_data[$i]['cm_no_small_drink']; $k++) {
+                        if ($table_data[$i]['cm_no_small_drink'] > 1) {
+                            echo '<h4>Small Drink ' . ($k + 1) . '</h4>';
+                        } else {
+                            echo '<h4>Small Drink</h4>';
+                        }
+                        for ($j = 0; $j < count($data['drinks']); $j++) {
+                            $drink_data = $data['drinks'][$j];
+                            $drink = array(
+                                'name'          => 'cm_small_drink' . $k,
+                                'id'            => 'cm_small_drink' . $k,
+                                'value'         => $drink_data['drink_id'],
+                                'checked'       => FALSE,
+                                'style'         => 'margin:10px'
+                            );
+                            echo form_radio($drink);
+                            echo form_label($drink_data['drink_name'], 'cm_small_drink' . $drink_data['drink_id']) . '<br>';
+                        }
+                    }
+                    for ($k = 0; $k < $table_data[$i]['cm_no_large_drink']; $k++) {
+                        if ($table_data[$i]['cm_no_large_drink'] > 1) {
+                            echo '<h4>Large Drink ' . ($k + 1) . '</h4>';
+                        } else {
+                            echo '<h4>Large Drink</h4>';
+                        }
+                        for ($j = 0; $j < count($data['drinks']); $j++) {
+                            $drink_data = $data['drinks'][$j];
+                            $drink = array(
+                                'name'          => 'cm_large_drink' . $k,
+                                'id'            => 'cm_large_drink' . $k,
+                                'value'         => $drink_data['drink_id'],
+                                'checked'       => FALSE,
+                                'style'         => 'margin:10px'
+                            );
+                            echo form_radio($drink);
+                            echo form_label($drink_data['drink_name'], 'cm_large_drink' . $drink_data['drink_id']) . '<br>';
+                        }
+                    }
                     $js = 'onClick="some_function()"';
-                    echo form_button('cm_btn' . $table_data[$i]['cm_id'], 'Add to Cart&nbsp;&nbsp;&nbsp;&nbsp;' . $screen_cm_price[$i], $js);
+                    echo form_button('cm_btn' . $table_data[$i]['cm_id'], 'Add to Cart&nbsp;&nbsp;&nbsp;&nbsp;' . $table_data[$i]['cm_price'], $js);
                 }
                 break;
         }
