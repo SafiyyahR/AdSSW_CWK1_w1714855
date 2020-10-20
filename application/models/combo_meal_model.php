@@ -1,4 +1,5 @@
 <?php
+defined('BASEPATH') OR exit('No direct script access allowed');
 class Combo_Meal_Model extends CI_Model
 {
     public $cm_id;
