@@ -1,0 +1,101 @@
+.border-medium {
+    border-width: 4px !important;
+}
+
+.row {
+    margin: 0;
+}
+
+.footer-content {
+    background-color: #ffc107;
+    color: black;
+}
+
+.footer-link {
+    background-color: #ffc107;
+    color: black;
+}
+
+.footer-link:hover {
+    color: gray;
+}
+
+.nav-link, .navbar-brand {
+    color: #ffc107 !important;
+}
+
+.custom-btn-scroll-top {
+    position: fixed;
+    width: 40px;
+    bottom: 20px;
+    align-items: center;
+    height: 40px;
+    z-index: 1000;
+    cursor: pointer;
+    border-radius: 50%;
+    background-color: #FFC107;
+    border: 1px solid #FFC107;
+    text-align: center;
+    color: white;
+}
+
+.custom-div-scroll-top {
+    position: fixed;
+    width: 100%;
+    bottom: 20px;
+    align-items: center;
+    z-index: 1000;
+    cursor: pointer;
+    left: 95%;
+    z-index: 1000;
+    text-align: center;
+}
+
+.custom-btn-scroll-top:hover {
+    opacity: 1;
+}
+
+.custom-scroll-top {
+    height: 40px;
+    width: 40px;
+}
+
+@media (max-width: 992px) {
+    .custom-div-scroll-top {
+        left: 85%;
+        bottom: 40px;
+    }
+}
+
+.navbar-toggler {
+    border: 2px solid #FFC107 !important;
+}
+
+.navbar-toggler-icon {
+    background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' width='30' height='30' viewBox='0 0 30 30'%3e%3cpath stroke='rgba(255,193,7,1.0)' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e") !important;
+}
+
+.navbar-brand:hover {
+    background-color: transparent !important;
+}
+
+.nav-item:hover {
+    border: 2px solid #FFC107 !important;
+}
+
+.bg-custom {
+    background: transparent;
+    -webkit-transition: background 1.5s;
+    -moz-transition: background 1.5s;
+    -ms-transition: background 1.5s;
+    -o-transition: background 1.5s;
+    transition: background 1.5s;
+}
+
+.material-icons {
+    color: #212529;
+}
+
+.navbar-brand {
+    border: none !important;
+}

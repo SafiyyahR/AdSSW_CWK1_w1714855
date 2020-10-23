@@ -12,7 +12,12 @@ class Menu extends CI_Controller
 
 	public function index()
 	{
-		$data=$this->table_structure_model->get_data();
+		$data = $this->table_structure_model->get_data();
+		$this->load->helper('url');
+		$this->load->view('head', array('page_title' => 'Menu '));
+		$this->load->view('navbar', array('page_name' => 'menu'));
+		$this->load->view('scrolltotop');
 		$this->load->view('display_menu', array('data' => $data));
+		$this->load->view('footer');
 	}
 }

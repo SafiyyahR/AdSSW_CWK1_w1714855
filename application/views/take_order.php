@@ -5,11 +5,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
 <!DOCTYPE html>
 <html lang="en">
 
-<head>
-    <meta charset="utf-8">
-    <title>Order | Westminster Pizza w1714855</title>
-</head>
-
 <body>
     <?php
     $attributes = array('class' => 'order_form', 'id' => 'take_order_form');
@@ -227,10 +222,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
         }
     }
 
-
-    //echo form_submit('btnSubmit', 'Submit');
-
-    //echo form_close();
+    echo form_close();
     ?>
 </body>
 
