@@ -29,4 +29,13 @@ class Side_Model extends CI_Model
             echo 'Entry already inserted';
         }
     }
+    function get_price($data)
+    {
+        $this->side_id = $data['id'];
+        $size = $data['size'];
+        $query = $this->db->select('side_pr_' . $size)
+            ->where('side_id', $this->side_id)
+            ->get('sides');
+        echo '<p class="text-white">' . json_encode($query->result()) . '</p>';
+    }
 }

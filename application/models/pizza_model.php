@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 class Pizza_Model extends CI_Model
 {
     public $pizza_id;
@@ -17,7 +17,7 @@ class Pizza_Model extends CI_Model
     function insert_record($data)
     {
         $this->pizza_name =  $data[0];
-        $this->pizza_description=$data[1];
+        $this->pizza_description = $data[1];
         $this->pizza_pr_small = $data[2];
         $this->pizza_pr_medium = $data[3];
         $this->pizza_pr_large = $data[4];
@@ -32,5 +32,15 @@ class Pizza_Model extends CI_Model
         } else {
             echo 'Entry already inserted';
         }
+    }
+
+    function get_price($data)
+    {
+        $this->pizza_id = $data['id'];
+        $size = $data['size'];
+        $query = $this->db->select('pizza_pr_' . $size)
+            ->where('pizza_id', $this->pizza_id)
+            ->get('pizza');
+        echo '<p class="text-white">' . json_encode($query->result()) . '</p>';
     }
 }

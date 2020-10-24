@@ -43,4 +43,12 @@ class Combo_Meal_Model extends CI_Model
             echo 'Entry already inserted';
         }
     }
+    function get_price($id)
+    {
+        $this->cm_id = $id;
+        $query = $this->db->select('cm_price')
+            ->where('cm_id', $this->cm_id)
+            ->get('combo_meals');
+        echo '<p class="text-white">' . json_encode($query->result()) . '</p>';
+    }
 }

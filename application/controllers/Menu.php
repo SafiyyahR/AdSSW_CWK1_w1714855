@@ -8,6 +8,11 @@ class Menu extends CI_Controller
 	{
 		parent::__construct();
 		$this->load->model('table_structure_model');
+		$this->load->library('session');
+		if (!$this->session->has_userdata('order')) {
+			$this->session->set_userdata('order', []);
+		}
+		//echo '<p class="text-white">' . json_encode($this->session->userdata('order')) . '</p>';
 	}
 
 	public function index()

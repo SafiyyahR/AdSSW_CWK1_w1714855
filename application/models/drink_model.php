@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 class Drink_Model extends CI_Model
 {
     public $drink_id;
@@ -7,7 +7,8 @@ class Drink_Model extends CI_Model
     public $drink_pr_small;
     public $drink_pr_large;
 
-    public function __construct()    {
+    public function __construct()
+    {
         parent::__construct();
     }
 
@@ -27,5 +28,14 @@ class Drink_Model extends CI_Model
         } else {
             echo 'Entry already inserted';
         }
+    }
+    function get_price($data)
+    {
+        $this->drink_id = $data['id'];
+        $size = $data['size'];
+        $query = $this->db->select('drink_pr_' . $size)
+            ->where('drink_id', $this->drink_id)
+            ->get('drinks');
+        echo '<p class="text-white">' . json_encode($query->result()) . '</p>';
     }
 }

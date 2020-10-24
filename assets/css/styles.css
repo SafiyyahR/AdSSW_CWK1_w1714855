@@ -99,3 +99,7 @@
 .navbar-brand {
     border: none !important;
 }
+
+.pizza_topping_btns {
+    display: none;
+}

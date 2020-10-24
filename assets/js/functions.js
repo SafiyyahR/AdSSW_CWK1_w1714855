@@ -23,3 +23,18 @@ function backToTop() {
         behavior: "smooth"
     });
 }
+
+function toggleToppingsBtn(index) {
+    console.log(document.getElementById("customise_topping_btn_" + index));
+    if (document.getElementById("pizza_topping_btn_" + index).style.display == 'block') {
+        document.getElementById("pizza_topping_btn_" + index).style.display = 'none';
+        document.getElementById("customise_topping_btn_" + index).innerText = 'Add Toppings';
+    } else {
+        document.getElementById("pizza_topping_btn_" + index).style.display = 'block';
+        document.getElementById("customise_topping_btn_" + index).innerText = 'Hide Toppings';
+    }
+}
+
+function displayPizzaPrice(index) {
+    console.log(document.getElementById("pizza_" + index).value);
+}
