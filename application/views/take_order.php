@@ -23,6 +23,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                     for ($i = 0; $i < count($table_data); $i++) {
                         $attributes = ['class' => 'pizza_form', 'id' => 'pizza_form_' . $table_data[$i]['pizza_id']];
                         $hidden = ['type' => 'pizza', 'id' => $table_data[$i]['pizza_id']];
+                        echo json_encode($hidden);
                         echo form_open('order/confirm_order', $attributes, $hidden);
                         echo '<h4>' . $table_data[$i]['pizza_name'] . '</h4>';
                         echo '<h5>' . $table_data[$i]['pizza_description'] . '</h5>';

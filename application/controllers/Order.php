@@ -14,11 +14,12 @@ class Order extends CI_Controller
         if (!$this->session->has_userdata('order')) {
             $this->session->set_userdata('order', []);
         }
-        //echo '<p class="text-white">' . json_encode($this->session->userdata('order')) . '</p>';
+        echo '<p class="text-white">' . json_encode($this->session->userdata('order')) . '</p>';
     }
 
     public function index()
     {
+        //echo json_decode($this->input->post('id'), true)['type'];
         $data = $this->table_structure_model->get_data();
         $this->load->view('head', array('page_title' => 'Make Order '));
         $this->load->view('navbar', array('page_name' => 'make_order'));
@@ -55,6 +56,7 @@ class Order extends CI_Controller
                         if ($size != 'small' && $size != 'medium' && $size && 'large') {
                             $error_found = true;
                         } else {
+                            $orders = $this->session->userdata('order');
                             for ($j = 0; $j < count($data['toppings']); $j++) {
                                 if ($this->input->post('topping_' . $j)) {
                                     array_push($topping_ids, $this->input->post('topping_' . $j));
@@ -77,11 +79,17 @@ class Order extends CI_Controller
                             // echo '<p class="text-white">' . $this->input->post('id') . '</p>';
                             // echo '<p class="text-white">' . $this->input->post('size') . '</p>';
                             // echo '<p class="text-white">' . $total_price . '</p>';
-                            $data = array(
+                            if (count($orders) > 0) {
+                                $id = $orders[count($orders) - 1]['id'] + 1;
+                            } else {
+                                $id = 1;
+                            }
+                            $order = array(
+                                'id' => $id,
                                 'type' => $type,
                                 'size' => $size,
                                 'topping' => $toppings,
-                                'price' => $total_price,
+                                'total_price' => $total_price,
                                 'confirmed' => false,
                                 'details' => array('id' => $this->input->post('id'), 'name' => $pizza_details['pizza_name'], 'price' => $pizza_details['pizza_pr_' . $size])
                             );
@@ -89,14 +97,22 @@ class Order extends CI_Controller
                     }
                     break;
             }
+            echo '<p class="text-white">' . json_encode($order) . '</p>';
+            // array_push($orders, $order);
+            // $this->session->set_userdata('order', $orders);
+            $this->load->view('head', array('page_title' => 'Confirm Order '));
+            $this->load->view('navbar', array('page_name' => 'confirm_order'));
+            $this->load->view('scrolltotop');
+            $this->load->view('confirm_order', array('details' => $order));
+            $this->load->view('footer');
         } else {
             echo '<p class="text-white">False</p>';
+            $message = 'Did Not Select any item to be added to the cart';
+            $this->load->view('head', array('page_title' => 'Confirm Order '));
+            $this->load->view('navbar', array('page_name' => 'confirm_order'));
+            $this->load->view('scrolltotop');
+            $this->load->view('error', array('message' => $message));
+            $this->load->view('footer');
         }
-        echo '<p class="text-white">' . json_encode($data) . '</p>';
-        $this->load->view('head', array('page_title' => 'Confirm Order '));
-        $this->load->view('navbar', array('page_name' => 'confirm_order'));
-        $this->load->view('scrolltotop');
-        $this->load->view('display_order', array('data' => $data));
-        $this->load->view('footer');
     }
 }
