@@ -48,6 +48,7 @@ class Order extends CI_Controller
             $type = $this->input->post('type');
             switch ($type) {
                 case "pizza":
+                    $topping_ids = [];
                     $toppings = [];
                     if ($this->input->post('size')) {
                         $size = $this->input->post('size');
@@ -56,24 +57,34 @@ class Order extends CI_Controller
                         } else {
                             for ($j = 0; $j < count($data['toppings']); $j++) {
                                 if ($this->input->post('topping_' . $j)) {
-                                    array_push($toppings, $this->input->post('topping_' . $j));
+                                    array_push($topping_ids, $this->input->post('topping_' . $j));
                                 }
                             }
                             $total_price = 0.0;
                             $this->load->model('pizza_model');
                             $this->load->model('topping_model');
-                            $pizza_price = $this->pizza_model->get_price(['size' => $size, 'id' => $this->input->post('id')]);
-                            $total_price += floatval($pizza_price['pizza_pr_' . $size]);
-                            for ($i=0; $i <count($toppings) ; $i++) { 
-                                $topping_price = $this->topping_model->get_price(['size' => $size, 'id' => $toppings[$i]]);
-                                $total_price += floatval($topping_price['topping_pr_'.$size]);
+                            $pizza_details = $this->pizza_model->get_price(['size' => $size, 'id' => $this->input->post('id')]);
+                            $total_price += floatval($pizza_details['pizza_pr_' . $size]);
+                            for ($i = 0; $i < count($topping_ids); $i++) {
+                                $topping_details = $this->topping_model->get_price(['size' => $size, 'id' => $topping_ids[$i]]);
+                                $total_price += floatval($topping_details['topping_pr_' . $size]);
+                                $topping = array('id' => $topping_ids[$i], 'name' => $topping_details['topping_name'], 'price' => $topping_details['topping_pr_' . $size]);
+                                array_push($toppings, $topping);
                             }
-                            echo '<p class="text-white">' .  $pizza_price['pizza_pr_' . $size] . '</p>';
-                            echo '<p class="text-white">' . json_encode($toppings) . '</p>';
-                            echo '<p class="text-white">' . $this->input->post('type') . '</p>';
-                            echo '<p class="text-white">' . $this->input->post('id') . '</p>';
-                            echo '<p class="text-white">' . $this->input->post('size') . '</p>';
-                            echo '<p class="text-white">' . $total_price . '</p>';
+                            // echo '<p class="text-white">' .  $pizza_details['pizza_pr_' . $size] . '</p>';
+                            // echo '<p class="text-white">' . json_encode($toppings) . '</p>';
+                            // echo '<p class="text-white">' . $this->input->post('type') . '</p>';
+                            // echo '<p class="text-white">' . $this->input->post('id') . '</p>';
+                            // echo '<p class="text-white">' . $this->input->post('size') . '</p>';
+                            // echo '<p class="text-white">' . $total_price . '</p>';
+                            $data = array(
+                                'type' => $type,
+                                'size' => $size,
+                                'topping' => $toppings,
+                                'price' => $total_price,
+                                'confirmed' => false,
+                                'details' => array('id' => $this->input->post('id'), 'name' => $pizza_details['pizza_name'], 'price' => $pizza_details['pizza_pr_' . $size])
+                            );
                         }
                     }
                     break;
@@ -81,7 +92,7 @@ class Order extends CI_Controller
         } else {
             echo '<p class="text-white">False</p>';
         }
-        $data = $this->table_structure_model->get_data();
+        echo '<p class="text-white">' . json_encode($data) . '</p>';
         $this->load->view('head', array('page_title' => 'Confirm Order '));
         $this->load->view('navbar', array('page_name' => 'confirm_order'));
         $this->load->view('scrolltotop');

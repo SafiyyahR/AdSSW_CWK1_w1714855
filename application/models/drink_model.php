@@ -18,24 +18,18 @@ class Drink_Model extends CI_Model
         $this->drink_pr_small = $data[1];
         $this->drink_pr_large = $data[2];
         $result = $this->db->get_where('drinks', array('drink_name' => $data[0]));
-        echo $result->num_rows();
         if ($result->num_rows() === 0) {
-            if ($this->db->insert('drinks', $this)) {
-                echo 'Entry inserted ';
-            } else {
-                echo 'Entry error';
-            }
-        } else {
-            echo 'Entry already inserted';
+            $this->db->insert('drinks', $this);
         }
     }
     function get_price($data)
     {
         $this->drink_id = $data['id'];
         $size = $data['size'];
-        $query = $this->db->select('drink_pr_' . $size)
+        $query = $this->db->select(['drink_pr_' . $size, 'drink_name'])
             ->where('drink_id', $this->drink_id)
             ->get('drinks');
-        echo '<p class="text-white">' . json_encode($query->result()) . '</p>';
+        //echo '<p class="text-white">' . json_encode($query->row_array()) . '</p>';
+        return ($query->row_array());
     }
 }

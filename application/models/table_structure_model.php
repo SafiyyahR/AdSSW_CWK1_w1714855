@@ -84,12 +84,12 @@ class Table_Structure_Model extends CI_Model
                         'default' => 1.50
                     )
                 ), 'primary_key' => 'topping_id', 'candidate_key' => 'topping_name', 'records' => array(
-                    array("Extra Mozzarella Cheese", 0.50, 1.00, 1.50),
+                    array("Triple Cheese", 0.50, 1.00, 1.50),
                     array("Olives", 0.50, 1.00, 1.50),
-                    array("Extra Pepperoni", 0.55, 1.10, 1.65),
+                    array("Pepperoni", 0.55, 1.10, 1.65),
                     array("Prawn", 0.80, 1.60, 2.40),
                     array("Anchovies", 0.70, 1.40, 2.10),
-                    array("Sun Dried Tomatoes", 0.60, 1.20, 1.80)
+                    array("Tomatoes", 0.60, 1.20, 1.80)
                 )
             ),
             'sides' => array(
@@ -221,12 +221,12 @@ class Table_Structure_Model extends CI_Model
                 )
 
             ), 'primary_key' => 'cm_id', 'candidate_key' => 'cm_name', 'records' => array(
-                array("Family Deal",'2 large pizzas, 2 large sides and a 1.5l drink', 0, 0, 2, 0, 2, 0, 1, 30.00),
-                array("Couples Deal",'2 medium pizzas, 1 small side and a 0.5l drink', 0, 2, 0, 0, 1, 1, 0, 20.00),
-                array("Game Night Deal",'3 large pizzas, 3 large sides and 2 1.5l drinks', 0, 0, 3, 0, 3, 0, 2, 40.00),
-                array("Halloween Deal",'3 large pizzas, 1 large sides and a 1.5l drink', 0, 0, 3, 0, 1, 0, 1, 35.00),
-                array("Favourite Deal",'3 small pizzas, 2 small sides and a 0.5l drink', 3, 0, 0, 2, 0, 1, 0, 20.00),
-                array("Feast",'2 medium pizzas, 4 small sides and 2 0.5l drinks', 0, 2, 0, 4, 0, 2, 0, 25.00)
+                array("Family Deal", '2 large pizzas, 2 large sides and a 1.5l drink', 0, 0, 2, 0, 2, 0, 1, 30.00),
+                array("Couples Deal", '2 medium pizzas, 1 small side and a 0.5l drink', 0, 2, 0, 0, 1, 1, 0, 20.00),
+                array("Game Night Deal", '3 large pizzas, 3 large sides and 2 1.5l drinks', 0, 0, 3, 0, 3, 0, 2, 40.00),
+                array("Halloween Deal", '3 large pizzas, 1 large sides and a 1.5l drink', 0, 0, 3, 0, 1, 0, 1, 35.00),
+                array("Favourite Deal", '3 small pizzas, 2 small sides and a 0.5l drink', 3, 0, 0, 2, 0, 1, 0, 20.00),
+                array("Feast", '2 medium pizzas, 4 small sides and 2 0.5l drinks', 0, 2, 0, 4, 0, 2, 0, 25.00)
             ))
         );
         //loading all the models

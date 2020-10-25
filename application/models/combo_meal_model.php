@@ -32,23 +32,17 @@ class Combo_Meal_Model extends CI_Model
         $this->cm_no_large_drink = $data[8];
         $this->cm_price = $data[9];
         $result = $this->db->get_where('combo_meals', array('cm_name' => $data[0]));
-        echo $result->num_rows();
         if ($result->num_rows() === 0) {
-            if ($this->db->insert('combo_meals', $this)) {
-                echo 'Entry inserted ';
-            } else {
-                echo 'Entry Error';
-            }
-        } else {
-            echo 'Entry already inserted';
+            $this->db->insert('combo_meals', $this);
         }
     }
     function get_price($id)
     {
         $this->cm_id = $id;
-        $query = $this->db->select('cm_price')
+        $query = $this->db->select(['cm_price', 'cm_name', 'cm_description'])
             ->where('cm_id', $this->cm_id)
             ->get('combo_meals');
-        echo '<p class="text-white">' . json_encode($query->result()) . '</p>';
+        //echo '<p class="text-white">' . json_encode($query->result()) . '</p>';
+        return ($query->row_array());
     }
 }

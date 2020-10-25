@@ -1,5 +1,5 @@
 <?php
-defined('BASEPATH') OR exit('No direct script access allowed');
+defined('BASEPATH') or exit('No direct script access allowed');
 class Side_Model extends CI_Model
 {
     public $side_id;
@@ -18,24 +18,18 @@ class Side_Model extends CI_Model
         $this->side_pr_small = $data[1];
         $this->side_pr_large = $data[2];
         $result = $this->db->get_where('sides', array('side_name' => $data[0]));
-        echo $result->num_rows();
         if ($result->num_rows() === 0) {
-            if ($this->db->insert('sides', $this)) {
-                echo 'Entry inserted ';
-            } else {
-                echo 'Entry Error';
-            }
-        } else {
-            echo 'Entry already inserted';
+            $this->db->insert('sides', $this);
         }
     }
     function get_price($data)
     {
         $this->side_id = $data['id'];
         $size = $data['size'];
-        $query = $this->db->select('side_pr_' . $size)
+        $query = $this->db->select(['side_pr_' . $size, 'side_name'])
             ->where('side_id', $this->side_id)
             ->get('sides');
-        echo '<p class="text-white">' . json_encode($query->result()) . '</p>';
+        //echo '<p class="text-white">' . json_encode($query->row_array()) . '</p>';
+        return ($query->row_array());
     }
 }

@@ -20,25 +20,18 @@ class Topping_Model extends CI_Model
         $this->topping_pr_medium = $data[2];
         $this->topping_pr_large = $data[3];
         $result = $this->db->get_where('toppings', array('topping_name' => $data[0]));
-        echo $result->num_rows();
         if ($result->num_rows() === 0) {
-            if ($this->db->insert('toppings', $this)) {
-                echo 'Entry inserted ';
-            } else {
-                echo 'Entry already inserted';
-            }
-        } else {
-            echo 'Entry already inserted';
+            $this->db->insert('toppings', $this);
         }
     }
     function get_price($data)
     {
         $this->topping_id = $data['id'];
         $size = $data['size'];
-        $query = $this->db->select('topping_pr_' . $size)
+        $query = $this->db->select(['topping_pr_' . $size, 'topping_name'])
             ->where('topping_id', $this->topping_id)
             ->get('toppings');
-        echo '<p class="text-white">' . json_encode($query->row_array()) . '</p>';
+        //echo '<p class="text-white">' . json_encode($query->row_array()) . '</p>';
         return ($query->row_array());
     }
 }
