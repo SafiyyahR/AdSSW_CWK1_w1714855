@@ -43,6 +43,17 @@
             <a class="nav-link" href="#">View Basket</a>
           </li>';
             break;
+          case "confirm_order":
+            echo '<li class="nav-item">
+              <a class="nav-link" href="#">Menu</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Make Order</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">View Basket</a>
+            </li>';
+            break;
         }
         ?>
       </ul>

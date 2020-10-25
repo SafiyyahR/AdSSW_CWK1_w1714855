@@ -38,6 +38,7 @@ class Topping_Model extends CI_Model
         $query = $this->db->select('topping_pr_' . $size)
             ->where('topping_id', $this->topping_id)
             ->get('toppings');
-        echo '<p class="text-white">' . json_encode($query->result()) . '</p>';
+        echo '<p class="text-white">' . json_encode($query->row_array()) . '</p>';
+        return ($query->row_array());
     }
 }

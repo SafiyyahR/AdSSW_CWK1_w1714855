@@ -59,14 +59,21 @@ class Order extends CI_Controller
                                     array_push($toppings, $this->input->post('topping_' . $j));
                                 }
                             }
-                            $total_price = 0;
-                            // $total_price+=
+                            $total_price = 0.0;
                             $this->load->model('pizza_model');
-                            $this->pizza_model->get_price(['size' => $size, 'id' => $this->input->post('id')]);
+                            $this->load->model('topping_model');
+                            $pizza_price = $this->pizza_model->get_price(['size' => $size, 'id' => $this->input->post('id')]);
+                            $total_price += floatval($pizza_price['pizza_pr_' . $size]);
+                            for ($i=0; $i <count($toppings) ; $i++) { 
+                                $topping_price = $this->topping_model->get_price(['size' => $size, 'id' => $toppings[$i]]);
+                                $total_price += floatval($topping_price['topping_pr_'.$size]);
+                            }
+                            echo '<p class="text-white">' .  $pizza_price['pizza_pr_' . $size] . '</p>';
                             echo '<p class="text-white">' . json_encode($toppings) . '</p>';
                             echo '<p class="text-white">' . $this->input->post('type') . '</p>';
                             echo '<p class="text-white">' . $this->input->post('id') . '</p>';
                             echo '<p class="text-white">' . $this->input->post('size') . '</p>';
+                            echo '<p class="text-white">' . $total_price . '</p>';
                         }
                     }
                     break;

@@ -41,6 +41,7 @@ class Pizza_Model extends CI_Model
         $query = $this->db->select('pizza_pr_' . $size)
             ->where('pizza_id', $this->pizza_id)
             ->get('pizza');
-        echo '<p class="text-white">' . json_encode($query->result()) . '</p>';
+        echo '<p class="text-white">' . json_encode($query->row_array()) . '</p>';
+        return ($query->row_array());
     }
 }
