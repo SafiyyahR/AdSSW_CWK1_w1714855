@@ -5,8 +5,8 @@ defined('BASEPATH') or exit('No direct script access allowed');
 <html lang="en">
 
 
-<body>
-	<div class="container w-100 text-white">
+<body onload="increaseHeight()" onresize="increaseHeight()">
+	<div class="container w-100 text-white" id="custom-content">
 		<div class="row w-100">
 			<h1 class="text-center w-100">MENU</h1>
 		</div>

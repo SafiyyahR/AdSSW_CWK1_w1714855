@@ -36,13 +36,20 @@ class Combo_Meal_Model extends CI_Model
             $this->db->insert('combo_meals', $this);
         }
     }
-    function get_price($id)
+    function get_details($data)
     {
-        $this->cm_id = $id;
-        $query = $this->db->select(['cm_price', 'cm_name', 'cm_description'])
-            ->where('cm_id', $this->cm_id)
-            ->get('combo_meals');
-        //echo '<p class="text-white">' . json_encode($query->result()) . '</p>';
-        return ($query->row_array());
+        $this->cm_id = $data;
+        $this->db->select('*');
+        $this->db->from('combo_meals');
+        $this->db->where('cm_id', $this->cm_id);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            return ($query->row_array());
+        }
+        // $query = $this->db->select('*')
+        //     ->where('cm_id', $this->cm_id)
+        //     ->get('combo_meals');
+        // echo '<p class="text-white">' . $query . '</p>';
+
     }
 }

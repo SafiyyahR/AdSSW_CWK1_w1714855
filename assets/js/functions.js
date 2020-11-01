@@ -35,6 +35,34 @@ function toggleToppingsBtn(index) {
     }
 }
 
+function toggleChooseOptionBtn(btn_id, div_id) {
+    console.log(document.getElementById(div_id));
+    if (document.getElementById(div_id).style.display == 'block') {
+        document.getElementById(div_id).style.display = 'none';
+        document.getElementById(btn_id).innerText = 'Choose Option';
+    } else {
+        document.getElementById(div_id).style.display = 'block';
+        document.getElementById(btn_id).innerText = 'Hide Options';
+    }
+}
+
 function displayPizzaPrice(index) {
     console.log(document.getElementById("pizza_" + index).value);
+}
+
+function increaseHeight() {
+    console.log(window.innerHeight);
+    console.log(document.getElementById('custom_content').offsetHeight);
+    console.log(window.innerHeight - 150);
+    if ((document.getElementById('custom_content').offsetHeight + 150) < window.innerHeight) {
+        document.getElementById('custom_content').style.height = window.innerHeight - 102;
+    } else {
+        document.getElementById('custom_content').style.minHeight = window.innerHeight - 102;
+    }
+
+    var x = document.getElementsByClassName("choose_options_div");
+    var i;
+    for (i = 0; i < x.length; i++) {
+        x[i].style.display = "none";
+    }
 }
