@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-class Table_Structure_Model extends CI_Model
+class Table_structure_model extends CI_Model
 {
     private $table_structure;
 
@@ -105,25 +105,19 @@ class Table_Structure_Model extends CI_Model
                         'null' => FALSE,
                         'constraint' => '100',
                     ),
-                    'side_pr_small' =>  array(
+                    'side_price' =>  array(
                         'type' => 'DECIMAL',
                         'constraint' => '10,2',
                         'null' => FALSE,
                         'default' => 1.50
-                    ),
-                    'side_pr_large' =>  array(
-                        'type' => 'DECIMAL',
-                        'constraint' => '10,2',
-                        'null' => FALSE,
-                        'default' => 2.50
                     )
                 ), 'primary_key' => 'side_id', 'candidate_key' => 'side_name', 'records' => array(
-                    array("Coleslaw", 1.50, 2.50),
-                    array("Bread Sticks", 3, 5),
-                    array("Garlic Bread", 3, 5),
-                    array("Onion Rings", 3, 5),
-                    array("Potato Wedges", 3, 5),
-                    array("Mozzarella Sticks", 5, 7.50)
+                    array("Coleslaw", 2.50),
+                    array("Bread Sticks", 3.20),
+                    array("Garlic Bread", 1.50),
+                    array("Onion Rings", 2.50),
+                    array("Potato Wedges", 2.00),
+                    array("Mozzarella Sticks", 4.50)
                 )
 
             ),
@@ -140,25 +134,19 @@ class Table_Structure_Model extends CI_Model
                         'null' => FALSE,
                         'constraint' => '100',
                     ),
-                    'drink_pr_small' =>  array(
+                    'drink_price' =>  array(
                         'type' => 'DECIMAL',
                         'constraint' => '10,2',
                         'null' => FALSE,
                         'default' => 1.00
-                    ),
-                    'drink_pr_large' =>  array(
-                        'type' => 'DECIMAL',
-                        'constraint' => '10,2',
-                        'null' => FALSE,
-                        'default' => 2.50
                     )
                 ), 'primary_key' => 'drink_id', 'candidate_key' => 'drink_name', 'records' => array(
-                    array("Pepsi", 1.75, 3.00),
-                    array("Pepsi Max", 1.50, 2.50),
-                    array("Pepsi Diet", 1.50, 2.50),
-                    array("Tango", 1.50, 2.50),
-                    array("7up Sugar Free", 1.50, 2.50),
-                    array("Bottled Water", 1.00, 1.50)
+                    array("Pepsi", 1.75),
+                    array("Pepsi Max", 1.50),
+                    array("Pepsi Diet", 1.25),
+                    array("Tango", 1.50),
+                    array("7up Sugar Free", 0.75),
+                    array("Bottled Water", 0.65)
                 )
             ),
             'combo_meals' => array('fields' => array(
@@ -193,22 +181,12 @@ class Table_Structure_Model extends CI_Model
                     'null' => FALSE,
                     'default' => 0
                 ),
-                'cm_no_small_side' =>  array(
+                'cm_no_side' =>  array(
                     'type' => 'INT',
                     'null' => FALSE,
                     'default' => 0
                 ),
-                'cm_no_large_side' =>  array(
-                    'type' => 'INT',
-                    'null' => FALSE,
-                    'default' => 0
-                ),
-                'cm_no_small_drink' =>  array(
-                    'type' => 'INT',
-                    'null' => FALSE,
-                    'default' => 0
-                ),
-                'cm_no_large_drink' =>  array(
+                'cm_no_drink' =>  array(
                     'type' => 'INT',
                     'null' => FALSE,
                     'default' => 0
@@ -221,12 +199,12 @@ class Table_Structure_Model extends CI_Model
                 )
 
             ), 'primary_key' => 'cm_id', 'candidate_key' => 'cm_name', 'records' => array(
-                array("Family Deal", '2 large pizzas, 2 large sides and a 1.5l drink', 0, 0, 2, 0, 2, 0, 1, 30.00),
-                array("Couples Deal", '2 medium pizzas, 1 small side and a 0.5l drink', 0, 2, 0, 0, 1, 1, 0, 20.00),
-                array("Game Night Deal", '3 large pizzas, 3 large sides and 2 1.5l drinks', 0, 0, 3, 0, 3, 0, 2, 40.00),
-                array("Halloween Deal", '3 large pizzas, 1 large sides and a 1.5l drink', 0, 0, 3, 0, 1, 0, 1, 35.00),
-                array("Favourite Deal", '3 small pizzas, 2 small sides and a 0.5l drink', 3, 0, 0, 2, 0, 1, 0, 20.00),
-                array("Feast", '2 medium pizzas, 4 small sides and 2 0.5l drinks', 0, 2, 0, 4, 0, 2, 0, 25.00)
+                array("Family Deal", '2 large pizzas, 2 sides and a 2 1l drinks', 0, 0, 2, 2, 1, 30.00),
+                array("Couples Deal", '1 large pizza, 1 side and a 1l drink', 0, 0, 1, 1, 1, 15.75),
+                array("Game Night Deal", '3 large pizzas, 4 sides and 3 1l drinks', 0, 0, 3, 4, 3, 49.00),
+                array("Feast for 1", '1 medium pizza, 1 side and a 1l drink', 0, 1, 0, 1, 1, 12.00),
+                array("Favourite Deal", '3 small pizzas, 2 sides and a 1l drink', 3, 0, 0, 2, 1, 22.00),
+                array("Feast for 2", '2 medium pizzas, 2 sides and a 1l drink', 0, 2, 0, 2, 1,23.40 )
             ))
         );
         //loading all the models
@@ -249,7 +227,6 @@ class Table_Structure_Model extends CI_Model
             $this->dbforge->add_key($table_data['candidate_key']);
             $this->dbforge->create_table($table_name);
             $query = $this->db->get($table_name);
-            // echo $table_name . ' ' . $query->num_rows() . '<br>';
             if ($query->num_rows() < 6) {
                 for ($i = 0; $i < count($table_data['records']); $i++) {
                     switch ($table_name) {

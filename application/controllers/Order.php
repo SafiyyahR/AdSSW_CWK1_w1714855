@@ -155,60 +155,42 @@ class Order extends CI_Controller
                     }
                     break;
                 case 'side':
-                    if ($this->input->post('size')) {
-                        $size = $this->input->post('size');
-                        if ($size != 'small' && $size != 'large') {
-                            $error_found = true;
-                        } else {
-                            $orders = $this->session->userdata('order');
-                            $total_price = 0.0;
-                            $this->load->model('side_model');
-                            $side_details = $this->side_model->get_price(['size' => $size, 'id' => $this->input->post('id')]);
-                            $total_price += floatval($side_details['side_pr_' . $size]);
-                            if (count($orders) > 0) {
-                                $id = $orders[count($orders) - 1]['id'] + 1;
-                            } else {
-                                $id = 1;
-                            }
-                            $order = array(
-                                'id' => $id,
-                                'type' => $type,
-                                'size' => $size,
-                                'total_price' => number_format((float)$total_price, 2, '.', ''),
-                                'details' => array('id' => $this->input->post('id'), 'name' => $side_details['side_name'], 'price' => $side_details['side_pr_' . $size])
-                            );
-                        }
+                    $orders = $this->session->userdata('order');
+                    $total_price = 0.0;
+                    $this->load->model('side_model');
+                    $side_details = $this->side_model->get_price($this->input->post('id'));
+                    $total_price += floatval($side_details['side_price']);
+                    if (count($orders) > 0) {
+                        $id = $orders[count($orders) - 1]['id'] + 1;
                     } else {
-                        $error_found = true;
+                        $id = 1;
                     }
+                    $order = array(
+                        'id' => $id,
+                        'type' => $type,
+                        'total_price' => number_format((float)$total_price, 2, '.', ''),
+                        'details' => array('id' => $this->input->post('id'), 'name' => $side_details['side_name'], 'price' => $side_details['side_price'])
+                    );
+
                     break;
                 case 'drink':
-                    if ($this->input->post('size')) {
-                        $size = $this->input->post('size');
-                        if ($size != 'small' && $size != 'large') {
-                            $error_found = true;
-                        } else {
-                            $orders = $this->session->userdata('order');
-                            $total_price = 0.0;
-                            $this->load->model('drink_model');
-                            $drink_details = $this->drink_model->get_price(['size' => $size, 'id' => $this->input->post('id')]);
-                            $total_price += floatval($drink_details['drink_pr_' . $size]);
-                            if (count($orders) > 0) {
-                                $id = $orders[count($orders) - 1]['id'] + 1;
-                            } else {
-                                $id = 1;
-                            }
-                            $order = array(
-                                'id' => $id,
-                                'type' => $type,
-                                'size' => $size,
-                                'total_price' => number_format((float)$total_price, 2, '.', ''),
-                                'details' => array('id' => $this->input->post('id'), 'name' => $drink_details['drink_name'], 'price' => $drink_details['drink_pr_' . $size])
-                            );
-                        }
+                    $orders = $this->session->userdata('order');
+                    $total_price = 0.0;
+                    $this->load->model('drink_model');
+                    $drink_details = $this->drink_model->get_price($this->input->post('id'));
+                    $total_price += floatval($drink_details['drink_price']);
+                    if (count($orders) > 0) {
+                        $id = $orders[count($orders) - 1]['id'] + 1;
                     } else {
-                        $error_found = true;
+                        $id = 1;
                     }
+                    $order = array(
+                        'id' => $id,
+                        'type' => $type,
+                        'total_price' => number_format((float)$total_price, 2, '.', ''),
+                        'details' => array('id' => $this->input->post('id'), 'name' => $drink_details['drink_name'], 'price' => $drink_details['drink_price'])
+                    );
+
                     break;
                 case 'cm':
                     $orders = $this->session->userdata('order');
@@ -263,59 +245,31 @@ class Order extends CI_Controller
                         }
                     }
                     $items = array();
-                    if ($cm_details["cm_no_small_side"] > 0) {
-                        for ($i = 0; $i < $cm_details["cm_no_small_side"]; $i++) {
-                            if ($this->input->post('cm_small_side_' . $i)) {
-                                array_push($items, $this->input->post('cm_small_side_' . $i));
+                    if ($cm_details["cm_no_side"] > 0) {
+                        for ($i = 0; $i < $cm_details["cm_no_side"]; $i++) {
+                            if ($this->input->post('cm_side_' . $i)) {
+                                array_push($items, $this->input->post('cm_side_' . $i));
                             }
                         }
-                        if (count($items) == $cm_details["cm_no_small_side"]) {
-                            $items_chosen['small_side'] = $items;
+                        if (count($items) == $cm_details["cm_no_side"]) {
+                            $items_chosen['side'] = $items;
                         } else {
                             $error_found = true;
-                            $message = 'The small side has not been chosen for the combo meal.';
+                            $message = 'The side has not been chosen for the combo meal.';
                         }
                     }
                     $items = array();
-                    if ($cm_details["cm_no_large_side"] > 0) {
-                        for ($i = 0; $i < $cm_details["cm_no_large_side"]; $i++) {
-                            if ($this->input->post('cm_large_side_' . $i)) {
-                                array_push($items, $this->input->post('cm_large_side_' . $i));
+                    if ($cm_details["cm_no_drink"] > 0) {
+                        for ($i = 0; $i < $cm_details["cm_no_drink"]; $i++) {
+                            if ($this->input->post('cm_drink_' . $i)) {
+                                array_push($items, $this->input->post('cm_drink_' . $i));
                             }
                         }
-                        if (count($items) == $cm_details["cm_no_large_side"]) {
-                            $items_chosen['large_side'] = $items;
+                        if (count($items) == $cm_details["cm_no_drink"]) {
+                            $items_chosen['drink'] = $items;
                         } else {
                             $error_found = true;
-                            $message = 'The large side has not been chosen for the combo meal.';
-                        }
-                    }
-                    $items = array();
-                    if ($cm_details["cm_no_small_drink"] > 0) {
-                        for ($i = 0; $i < $cm_details["cm_no_small_drink"]; $i++) {
-                            if ($this->input->post('cm_small_drink_' . $i)) {
-                                array_push($items, $this->input->post('cm_small_drink_' . $i));
-                            }
-                        }
-                        if (count($items) == $cm_details["cm_no_small_drink"]) {
-                            $items_chosen['small_drink'] = $items;
-                        } else {
-                            $error_found = true;
-                            $message = 'The small drink has not been chosen for the combo meal.';
-                        }
-                    }
-                    $items = array();
-                    if ($cm_details["cm_no_large_drink"] > 0) {
-                        for ($i = 0; $i < $cm_details["cm_no_large_drink"]; $i++) {
-                            if ($this->input->post('cm_large_drink_' . $i)) {
-                                array_push($items, $this->input->post('cm_large_drink_' . $i));
-                            }
-                        }
-                        if (count($items) == $cm_details["cm_no_large_drink"]) {
-                            $items_chosen['large_drink'] = $items;
-                        } else {
-                            $error_found = true;
-                            $message = 'The large drink has not been chosen for the combo meal.';
+                            $message = 'The drink has not been chosen for the combo meal.';
                         }
                     }
                     $order = array(

@@ -12,7 +12,6 @@ class Menu extends CI_Controller
 		if (!$this->session->has_userdata('order')) {
 			$this->session->set_userdata('order', []);
 		}
-		//echo '<p class="text-white">' . json_encode($this->session->userdata('order')) . '</p>';
 	}
 
 	public function index()

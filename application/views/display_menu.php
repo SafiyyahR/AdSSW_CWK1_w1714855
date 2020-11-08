@@ -106,56 +106,46 @@ defined('BASEPATH') or exit('No direct script access allowed');
 			echo '</div>';
 		} ?>
 		<div class="row mt-4">
-			<div class="col-5 p-0 col-md-6">
+			<div class="col-8 p-0">
 				<h2 class="text-warning border-bottom border-warning border-medium" id="sides">Sides</h2>
 			</div>
 		</div>
 		<div class="row w-100 mb-3">
-			<div class="col-6"></div>
-			<div class="col-3 p-0">
-				<h3 class="text-warning text-right ">S</h3>
-			</div>
-			<div class="col-3 p-0">
-				<h3 class="text-warning text-right">L</h3>
+			<div class="col-8"></div>
+			<div class="col-4 p-0">
+				<h3 class="text-warning text-right ">Price</h3>
 			</div>
 		</div>
 		<?php
 		for ($i = 0; $i < count($data['sides']); $i++) {
 			$side_data = $data['sides'][$i];
 			echo '<div class="row border-bottom border-warning w-100 mb-3">';
-			echo '<div class="col-6 p-0">';
+			echo '<div class="col-8 p-0">';
 			echo '<div class="row"><h5 >' . $side_data['side_name'] . '</h5></div></div>';
-			echo '<div class="col-3 p-0">';
-			echo '<h5 class="text-right">&#163;' . $side_data['side_pr_small'] . '</h5></div>';
-			echo '<div class="col-3 p-0">';
-			echo '<h5 class="text-right">&#163;' . $side_data['side_pr_large'] . '</h5></div>';
+			echo '<div class="col-4 p-0">';
+			echo '<h5 class="text-right">&#163;' . $side_data['side_price'] . '</h5></div>';
 			echo '</div>';
 		}
 		?>
 		<div class="row mt-4">
-			<div class="col-6 p-0">
+			<div class="col-8 p-0">
 				<h2 class="text-warning border-bottom border-warning border-medium" id="drinks">Drinks</h2>
 			</div>
 		</div>
 		<div class="row w-100 mb-3">
-			<div class="col-3 col-md-6"></div>
-			<div class="col-3 p-0">
-				<h3 class="text-warning text-right ">S</h3>
-			</div>
-			<div class="col-3 p-0">
-				<h3 class="text-warning text-right">L</h3>
+			<div class="col-8"></div>
+			<div class="col-4 p-0">
+				<h3 class="text-warning text-right ">Price</h3>
 			</div>
 		</div>
 		<?php
 		for ($i = 0; $i < count($data['drinks']); $i++) {
 			$drink_data = $data['drinks'][$i];
 			echo '<div class="row border-bottom border-warning w-100 mb-3">';
-			echo '<div class="col-6 p-0">';
+			echo '<div class="col-8 p-0">';
 			echo '<div class="row"><h5 >' . $drink_data['drink_name'] . '</h5></div></div>';
-			echo '<div class="col-3 p-0">';
-			echo '<h5 class="text-right">&#163;' . $drink_data['drink_pr_small'] . '</h5></div>';
-			echo '<div class="col-3 p-0">';
-			echo '<h5 class="text-right">&#163;' . $drink_data['drink_pr_large'] . '</h5></div>';
+			echo '<div class="col-4 p-0">';
+			echo '<h5 class="text-right">&#163;' . $drink_data['drink_price'] . '</h5></div>';
 			echo '</div>';
 		}
 		?>

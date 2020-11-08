@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-class Pizza_Model extends CI_Model
+class Pizza_model extends CI_Model
 {
     public $pizza_id;
     public $pizza_name;

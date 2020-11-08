@@ -1,6 +1,6 @@
 <?php
 defined('BASEPATH') or exit('No direct script access allowed');
-class Topping_Model extends CI_Model
+class Topping_model extends CI_Model
 {
     public $topping_id;
     public $topping_name;
