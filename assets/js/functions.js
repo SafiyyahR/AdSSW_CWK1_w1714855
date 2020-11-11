@@ -66,3 +66,24 @@ function increaseHeight() {
         x[i].style.display = "none";
     }
 }
+
+function toggleUpdateOrderBtn(index, original_quantity) {
+    console.log(document.getElementById("quantity_" + index));
+    var e = document.getElementById("quantity_" + index);
+    var selected_quantity = e.options[e.selectedIndex].text;
+    console.log(selected_quantity);
+    console.log(original_quantity);
+    console.log(document.getElementById('update_btn_' + index));
+    if (original_quantity != selected_quantity) {
+        document.getElementById('update_btn_' + index).style.display = 'block';
+    } else {
+        document.getElementById('update_btn_' + index).style.display = 'none';
+
+    }
+    //if (document.getElementById("quantity_" + index).style.display == 'block') {
+    //     document.getElementById("quantity_" + index).style.display = 'none';
+    // } else {
+    //     document.getElementById("quantity_" + index).style.display = 'block';
+    // }
+}
+

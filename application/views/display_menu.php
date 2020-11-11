@@ -34,16 +34,28 @@ defined('BASEPATH') or exit('No direct script access allowed');
 				<h2 class="text-warning border-bottom border-warning border-medium" id="pizza">Pizza</h2>
 			</div>
 		</div>
+		<div class="row w-100">
+			<div class="col-3 col-md-6"></div>
+			<div class="col-3 p-0 col-md-2">
+				<h5 class="text-warning text-right ">S</h5>
+			</div>
+			<div class="col-3 p-0 col-md-2">
+				<h5 class="text-warning text-right">M</h5>
+			</div>
+			<div class="col-3 p-0 col-md-2">
+				<h5 class="text-warning text-right">L</h5>
+			</div>
+		</div>
 		<div class="row w-100 mb-3">
 			<div class="col-3 col-md-6"></div>
 			<div class="col-3 p-0 col-md-2">
-				<h3 class="text-warning text-right ">S</h3>
+				<h5 class="text-warning text-right ">6"</h5>
 			</div>
 			<div class="col-3 p-0 col-md-2">
-				<h3 class="text-warning text-right">M</h3>
+				<h5 class="text-warning text-right">10"</h5>
 			</div>
 			<div class="col-3 p-0 col-md-2">
-				<h3 class="text-warning text-right">L</h3>
+				<h5 class="text-warning text-right">12"</h5>
 			</div>
 		</div>
 		<?php
@@ -76,15 +88,16 @@ defined('BASEPATH') or exit('No direct script access allowed');
 		<div class="row w-100 mb-3">
 			<div class="col-3 col-md-6"></div>
 			<div class="col-3 p-0 col-md-2">
-				<h3 class="text-warning text-right ">S</h3>
+				<h5 class="text-warning text-right ">S</h5>
 			</div>
 			<div class="col-3 p-0 col-md-2">
-				<h3 class="text-warning text-right">M</h3>
+				<h5 class="text-warning text-right">M</h5>
 			</div>
 			<div class="col-3 p-0 col-md-2">
-				<h3 class="text-warning text-right">L</h3>
+				<h5 class="text-warning text-right">L</h5>
 			</div>
 		</div>
+
 		<?php
 		for ($i = 0; $i < count($data['toppings']); $i++) {
 			$topping_data = $data['toppings'][$i];

@@ -24,7 +24,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         'name' => 'fname',
                         'placeholder'         => 'Safiyyah',
                         'maxlength'     => '100',
-                        'required' => true,
                         'style' => 'margin-left:10px; width:100%;height:100%'
                     ),
                     'Last Name' => array(
@@ -32,7 +31,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         'name' => 'lname',
                         'placeholder'         => 'Thur Rahman',
                         'maxlength'     => '100',
-                        'required' => true,
                         'style' => 'margin-left:10px; width:100%;height:100%'
                     ),
                     'Flat or house number' => array(
@@ -40,7 +38,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         'name' => 'house_no',
                         'placeholder'         => '74',
                         'maxlength'     => '20',
-                        'required' => true,
                         'style' => 'margin-left:10px; width:100%;height:100%'
                     ),
                     'Business or building name' => array(
@@ -48,7 +45,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         'name' => 'business',
                         'placeholder' => 'The Hub',
                         'maxlength'     => '350',
-                        'required' => false,
                         'style' => 'margin-left:10px; width:100%;height:100%'
                     ),
                     'Street Address' => array(
@@ -56,7 +52,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         'name' => 'street_add',
                         'placeholder'         => 'Locket Road',
                         'maxlength'     => '350',
-                        'required' => true,
                         'style' => 'margin-left:10px; width:100%;height:100%'
                     ),
                     'Postcode' => array(
@@ -64,7 +59,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         'name' => 'postcode',
                         'placeholder'         => 'HA3 7NL',
                         'maxlength'     => '7',
-                        'required' => true,
                         'style' => 'margin-left:10px; width:100%;height:100%'
                     ),
                     'Phone Number' => array(
@@ -72,7 +66,6 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         'name' => 'phone_no',
                         'placeholder'         => '0734553123',
                         'maxlength'     => '10',
-                        'required' => true,
                         'style' => 'margin-left:10px; width:100%;height:100%'
                     ),
                 );

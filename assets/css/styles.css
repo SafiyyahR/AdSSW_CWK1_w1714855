@@ -115,3 +115,7 @@
 .nav-item {
     text-align: center;
 }
+
+.update_order_btn {
+    display: none;
+}
