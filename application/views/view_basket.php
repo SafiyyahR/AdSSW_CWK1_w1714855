@@ -4,20 +4,10 @@ defined('BASEPATH') or exit('No direct script access allowed');
 ?>
 <!DOCTYPE html>
 <html lang="en">
-<!-- $options = array(
-                            'small'         => 'Small Pizza  - &#163;' . $table_data[$i]['pizza_pr_small'],
-                            'medium'          => 'Medium Pizza - &#163;' . $table_data[$i]['pizza_pr_medium'],
-                            'large'        => 'Large Pizza - &#163;' . $table_data[$i]['pizza_pr_large']
-                        );
-                        $js = [
-                            'id'       => 'pizza_' . $table_data[$i]['pizza_id'],
-                            'class' => ''
-                        ];
-                        // array_push($screen_pizza_price, $table_data[$i]['pizza_pr_small']);
-                        echo form_dropdown('size', $options, 'small', $js) . '<br>'; -->
 
 <body class="text-white" onload="increaseHeight()" onresize="increaseHeight()">
     <div class="container w-100 text-white mb-5" id="custom_content">
+
         <div class="row">
             <div class="col-12">
                 <div class="mb-4">
@@ -149,19 +139,40 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             echo '<div class="col-6 text-right">' . form_open('order/view_basket', '', $hidden) . form_submit('upd_order_btn', 'Update', $upd_btn_attributes) . form_close() . '</div></div>';
                         }
                         if ($i < (count($data['orders']) - 1)) {
-                            echo '<div class="row"><div class="col-12"><hr class="text-warning bg-warning"></div></div>';
+                            echo '<div class="row">
+                                        <div class="col-12">
+                                            <hr class="text-warning bg-warning">
+                                        </div>
+                                  </div>';
                         } else {
-                            echo '<div class="row"><div class="col-12"><hr class="text-warning bg-warning hr-custom"></div></div>';
+                            echo '<div class="row">
+                                        <div class="col-12">
+                                            <hr class="text-warning bg-warning hr-custom">
+                                        </div>
+                                  </div>';
                         }
                     }
-                    echo '<div class="row"><div class="col-8"><h5>Total Price</h5></div><div class="col-4"><h5 class="text-right">&pound;' . $data['total_price'] . '</h5></div></div>';
+                    echo '<div class="row">
+                    <div class="col-8">
+                        <h5>Total Price</h5>
+                    </div>
+                    <div class="col-4">
+                        <h5 class="text-right">&pound;' . $data['total_price'] . '</h5>
+                    </div>
+                </div>';
                 } else if (!count($data['new_order']) > 0) {
                     echo '<div class="row mt-5 pt-5">
-                        <div class="col-12">
-                            <h3 class="text-center">Your basket is empty.</h3>
-                            <div class="row mt-5 pt-5">
-                            <a class="text-center m-auto w-100 h-100" href="' . base_url() . 'index.php/order"><button  class="btn text-center m-auto btn-success">Keep Browsing</button></a></div>
-                        </div></div>';
+                    <div class="col-12">
+                        <h3 class="text-center">Your basket is empty.</h3>
+                        <div class="row mt-5 pt-5">
+                            <a class="text-center m-auto w-100 h-100" href="' . base_url() . 'index.php/order">
+                                <button class="btn text-center m-auto btn-success">
+                                    Keep Browsing
+                                </button>
+                            </a>
+                        </div>
+                    </div>
+                </div>';
                 }
                 if (count($data['new_order']) > 0) {
                     $details = $data['new_order'];
@@ -242,7 +253,9 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         }
                         echo '<div class="row"><div class="col-12"><h5>)</h5></div></div>';
                     }
-                    echo '<div class="row"><div class="col-12"><hr class="text-warning bg-warning hr-custom"></div></div><div class="row"><div class="col-8"><h5>Price</h5></div><div class="col-4"><h5 class="text-right">&pound;' . $details['total_price'] . '</h5></div></div><div class="row"><div class="col-6 text-right">';
+                    echo '<div class="row"><div class="col-12"><hr class="text-warning bg-warning hr-custom"></div></div>';
+                    echo '<div class="row"><div class="col-8"><h5>Price</h5></div><div class="col-4"><h5 class="text-right">&pound;' . $details['total_price'] . '</h5></div></div>';
+                    echo '<div class="row"><div class="col-6 text-right">';
                     $hidden = ['new_order' => json_encode($details)];
                     $con_btn_attributes = [
                         'class' => 'btn btn-success',
@@ -273,3 +286,5 @@ defined('BASEPATH') or exit('No direct script access allowed');
         </div>
     </div>
 </body>
+
+</html>

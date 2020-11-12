@@ -12,7 +12,7 @@
 	<script src="<?php echo base_url(); ?>assets/js/functions.js"></script>
 	<style>
 		body {
-			background-image: url(<?php echo base_url('assets/images/black-bg1.jpg'); ?>);
+			background-image: url(<?php echo base_url('assets/images/black-bg.jpg'); ?>);
 			background-color: #cccccc;
 			background-position: center;
 			background-repeat: no-repeat;

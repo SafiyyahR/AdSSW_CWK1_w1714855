@@ -73,16 +73,27 @@ defined('BASEPATH') or exit('No direct script access allowed');
                 echo form_open('order/order_complete', '', $hidden);
                 foreach ($attributes as $key => $value) {
                     if ('Flat or house number' == $key) {
-                        echo '<div class="row mt-3"><div class="col-12"><h2>Delivery Address</h2></div></div>';
+                        echo '<div class="row mt-3">
+                        <div class="col-12">
+                            <h2>Delivery Address</h2>
+                        </div>
+                    </div>';
                     }
                     echo '<div class="row my-2">';
                     echo '<div class="col-6">';
                     echo form_label($key, $value['id'], $label_attr);
-                    echo '</div><div class="col-6 text-right">';
+                    echo '</div>
+                    <div class="col-6 text-right">';
                     echo form_input($value) . '<br/>';
-                    echo '</div></div>';
+                    echo '</div>
+                    </div>';
                 }
-                echo '<div class="row w-100 text-center mt-5"><div class="col-12">' . form_submit('place_order_btn', 'Place Order', $place_order_attributes) . '</div></div>' . form_close(); ?>
+                echo '<div class="row w-100 text-center mt-5">
+                <div class="col-12">';
+                echo form_submit('place_order_btn', 'Place Order', $place_order_attributes);
+                echo '</div>
+                </div>';
+                echo form_close(); ?>
             </div>
         </div>
     </div>

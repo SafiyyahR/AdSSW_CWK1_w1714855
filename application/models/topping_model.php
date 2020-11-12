@@ -13,17 +13,6 @@ class Topping_model extends CI_Model
         parent::__construct();
     }
 
-    // function insert_record($data)
-    // {
-    //     $this->topping_name =  $data[0];
-    //     $this->topping_pr_small = $data[1];
-    //     $this->topping_pr_medium = $data[2];
-    //     $this->topping_pr_large = $data[3];
-    //     $result = $this->db->get_where('toppings', array('topping_name' => $data[0]));
-    //     if ($result->num_rows() === 0) {
-    //         $this->db->insert('toppings', $this);
-    //     }
-    // }
     function get_price($data)
     {
         $this->topping_id = $data['id'];

@@ -1,8 +1,6 @@
 window.addEventListener("scroll", this.changeNavBarBg);
 
 function changeNavBarBg() {
-    // var height = document.getElementById("header-custom").clientHeight;
-    // height = height - 50;
     if (
         document.body.scrollTop > 50 ||
         document.documentElement.scrollTop > 50
@@ -80,10 +78,5 @@ function toggleUpdateOrderBtn(index, original_quantity) {
         document.getElementById('update_btn_' + index).style.display = 'none';
 
     }
-    //if (document.getElementById("quantity_" + index).style.display == 'block') {
-    //     document.getElementById("quantity_" + index).style.display = 'none';
-    // } else {
-    //     document.getElementById("quantity_" + index).style.display = 'block';
-    // }
 }
 

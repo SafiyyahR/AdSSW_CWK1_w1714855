@@ -19,3 +19,4 @@ defined('BASEPATH') or exit('No direct script access allowed');
         </h3>
     </div>
 </body>
+</html>

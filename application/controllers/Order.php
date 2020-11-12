@@ -29,6 +29,8 @@ class Order extends CI_Controller
             'street_add' => 'street address', 'postcode' => 'postcode', 'phone_no' => 'phone number'
         );
         $data = array();
+        //changing the timezone to the Europe/London Time zone
+        date_default_timezone_set('Europe/London');
         //for loop is used to check if all the required fields have been entered.
         foreach ($items_to_be_entered as $key => $value) {
             //if the user has not entered one of the required fields then the loop is broken and a string is stored in $message.

@@ -11,15 +11,7 @@ class Drink_model extends CI_Model
         parent::__construct();
     }
 
-    // function insert_record($data)
-    // {
-    //     $this->drink_name =  $data[0];
-    //     $this->drink_price = $data[1];
-    //     $result = $this->db->get_where('drinks', array('drink_name' => $data[0]));
-    //     if ($result->num_rows() === 0) {
-    //         $this->db->insert('drinks', $this);
-    //     }
-    // }
+   
     function get_price($id)
     {
         $this->drink_id = $id;
