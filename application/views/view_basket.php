@@ -57,7 +57,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
                             echo '<div class="col-md-2 col-6">';
 
                             echo form_submit('upd_order_btn', 'Update', $upd_btn_attributes) . '</div>';
-                            echo '<div class="col-md-2 col-6"><h5 class="text-right ">&pound;' . $order['total_price'] . '</h5></div>';
+                            if ($order['type'] != 'pizza') {
+                                echo '<div class="col-md-2 col-6"><h5 class="text-right ">&pound;' . $order['total_price'] . '</h5></div>';
+                            } else {
+                                echo '<div class="col-md-2 col-6"><h5 class="text-right ">&pound;' . $order['details']['total_price'] . '</h5></div>';
+                            }
                             echo '</div>';
                             echo form_close();
                             if ($order['type'] == 'pizza') {
@@ -66,7 +70,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
                                     for ($j = 0; $j < count($order['topping']); $j++) {
                                         $topping = $order['topping'][$j];
                                         echo '<div class="row">';
-                                        echo '<div class="col-2"><h6>1</h6></div>';
+                                        echo '<div class="col-2"><h6>' . $order['quantity'] . '</h6></div>';
                                         echo '<div class="col-1"><h6>&#215;</h6></div>';
                                         echo '<div class="col-5"><h6>' . ucwords($topping['name']) . '</h6></div>';
                                         echo '<div class="col-4"><h6 class="text-right">&pound;' . $topping['tp_total_price'] . '</h6></div>';
@@ -184,7 +188,11 @@ defined('BASEPATH') or exit('No direct script access allowed');
                         } else {
                             echo '<div class="col-5"><h5>' . ucwords($details['details']['name']) . '</h5></div>';
                         }
-                        echo '<div class="col-3"><h5 class="text-right">&pound;' . $details['details']['price'] . '</h5></div>';
+                        if ($details['type'] == 'pizza') {
+                            echo '<div class="col-3"><h5 class="text-right">&pound;' . $details['details']['indi_price'] . '</h5></div>';
+                        } else {
+                            echo '<div class="col-3"><h5 class="text-right">&pound;' . $details['details']['price'] . '</h5></div>';
+                        }
                         echo '</div>';
                         if ($details['type'] == 'pizza') {
                             if (count($details['topping']) > 0) {

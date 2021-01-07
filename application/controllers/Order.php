@@ -177,7 +177,7 @@ class Order extends CI_Controller
                                 'topping' => $toppings,
                                 'indi_price' => number_format((float)$total_price, 2, '.', ''),
                                 'total_price' => number_format((float)$total_price, 2, '.', ''),
-                                'details' => array('id' => $this->input->post('new_id'), 'name' => $pizza_details['pizza_name'], 'price' => $pizza_details['pizza_pr_' . $size])
+                                'details' => array('id' => $this->input->post('new_id'), 'name' => $pizza_details['pizza_name'], 'indi_price' => $pizza_details['pizza_pr_' . $size], 'total_price' => $pizza_details['pizza_pr_' . $size])
                             );
                         }
                     } else {
@@ -340,6 +340,7 @@ class Order extends CI_Controller
                                 $new_total_price = number_format($this->input->post('quantity') * $order['indi_price'], 2, '.', '');
                                 $order['total_price'] = $new_total_price;
                                 if ($order['type'] == 'pizza') {
+                                    $order['details']['total_price'] = number_format($this->input->post('quantity') * $order['details']['indi_price'], 2, '.', '');
                                     for ($tp_i = 0; $tp_i < count($order['topping']); $tp_i++) {
                                         $topping = $order['topping'][$tp_i];
                                         $tp_total_price = number_format($this->input->post('quantity') * $topping['price'], 2, '.', '');

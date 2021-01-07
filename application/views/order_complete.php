@@ -7,7 +7,7 @@ defined('BASEPATH') or exit('No direct script access allowed');
 
 <body class="text-white" onload="increaseHeight()" onresize="increaseHeight()">
     <div class="py-5 text-center text-white mx-auto px-2" id="custom_content">
-        <h2>Dear <?php echo  $data['fname'] . ' ' . $data['lname']  ?>,</h2> <?php echo $data['current_timezone'] ?>
+        <h2>Dear <?php echo  $data['fname'] . ' ' . $data['lname']  ?>,</h2>
         <h2 class="my-5"> Your food will be delivered by <?php echo  $data['data_time'] ?> </h2>
         <h2>Address:</h2>
         <h2><?php echo  $data['house_no'] . ',';
