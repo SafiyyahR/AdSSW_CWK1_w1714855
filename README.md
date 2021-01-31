@@ -1,2 +1,1 @@
-# AdSSW_CWK1_w1714855
-Advanced Server Side Web Development Coursework 1
+Advanced Server-side Web Developement Coursework. PizzaNow website built using CodeIgniter, HTML, Bootstrap, CSS and JavaScript.
